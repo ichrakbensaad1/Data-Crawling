@@ -157,7 +157,28 @@ def replace_constat():
             text_box.tag_add("center", 1.0, "end")
             text_box.grid(column=1, row=3)
             replcts_text.set("replace_constat")
-            
+save_text = tk.StringVar()
+save_btn = tk.Button(root, textvariable=save_text,command=lambda:savedb(),font="Raleway", bg="#20bebe", fg="white", height=1, width=8)
+save_text.set("save")
+save_btn.grid(column=0, row=4)
+canvas = tk.Canvas(root, width=600, height=250)
+canvas.grid(columnspan=2)
+def savedb():
+    
+    file = filedialog.asksaveasfilename(
+            filetypes=[("csv file", ".csv")],
+        defaultextension=".csv")
+    if file:
+        
+        data.to_csv(file,index=False) # store as CSV file
+        
+
+    text_box = tk.Text(root, height=10, width=60, padx=20, pady=15)
+    text_box.insert(1.0,file)
+    text_box.tag_configure("center", justify="center")
+    text_box.tag_add("center", 1.0, "end")
+    text_box.grid(column=6, row=4)
+    save_text.set("save")         
              
 sca_text = tk.StringVar()
 sca_btn = tk.Button(root, textvariable=sca_text,command=lambda:scaling(),font="Raleway", bg="#20bebe", fg="white", height=1, width=8)
@@ -179,7 +200,28 @@ def scaling():
     text_box.grid(column=1, row=4)
     sca_text.set("sca")
             
-    
+z_score_text = tk.StringVar()
+z_score_btn = tk.Button(root, textvariable=sca_text,command=lambda:z_score(),font="Raleway", bg="#20bebe", fg="white", height=1, width=8)
+z_score_text.set("z_score")
+z_score_btn.grid(column=0, row=3)
+canvas = tk.Canvas(root, width=600, height=250)
+canvas.grid(columnspan=3)
+outliers=[]            
+def z_score(data):
+        threshold=3
+        mean=np.mean(data)
+        std=np.std(data)
+        for i in data :
+            z_score=(i-mean)/std
+            if np.abs(z_score)>threshold:
+                outliers.append(i)
+        text_box = tk.Text(root, height=10, width=60, padx=20, pady=15)
+        text_box.insert(1.0,outliers)
+        text_box.tag_configure("center", justify="center")
+        text_box.tag_add("center", 1.0, "end")
+        text_box.grid(column=1, row=4)
+        sca_text.set("z_score")
+        
 
 
 
