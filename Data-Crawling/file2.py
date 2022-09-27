@@ -157,7 +157,7 @@ def drop():
             global data 
             x=att_search.get()
             data[x]=data[x].fillna(data[x].dropna) 
-            #data1=data.
+            data1=data.read()
             fil= data.isnull().sum()
             text_box = tk.Text(root, height=10, width=60, padx=20, pady=15)
             text_box.insert(1.0,fil)
@@ -169,6 +169,7 @@ def drop():
 
 
 replcts_text = tk.StringVar()
+
 replcts_btn = tk.Button(root, textvariable=replcts_text,command=lambda:replace_constat(),font="Raleway", bg="#20bebe", fg="white", height=1, width=8)
 replcts_text.set("replace_constat")
 replcts_btn.grid(column=3, row=3)
@@ -206,23 +207,14 @@ canvas.grid(columnspan=3)
 
 
 
-  
-
-
 
 
 def savedb():
    
-    data.to_csv('data6.csv', index=False)
+    data1.to_csv('data6.csv', index=False)
        
        
 
-    
-
-    
-     
-
-        
              
 sca_text = tk.StringVar()
 sca_btn = tk.Button(root, textvariable=sca_text,command=lambda:scaling(),font="Raleway", bg="#20bebe", fg="white", height=1, width=8)
@@ -265,13 +257,13 @@ def z_score():
         print(z_score)
 
         """if np.abs(z_score)>threshold:
-                outliers.append(i)
+                outliers.append(i)"""
         text_box = tk.Text(root, height=10, width=60, padx=20, pady=15)
         text_box.insert(1.0,z_score)
-        #text_box.tag_configure("center", justify="center")
-        #text_box.tag_add("center", 1.0, "end")
-        #text_box.grid(column=1, row=4)
-        z_score_text.set("z_score")"""
+        text_box.tag_configure("center", justify="center")
+        text_box.tag_add("center", 1.0, "end")
+        text_box.grid(column=1, row=4)
+        z_score_text.set("z_score")
         
 
 #Detecting Outliers
@@ -300,14 +292,14 @@ def DBscan ():
     print(scaled_X)
     #X = pd.get_dummies(data.iloc[:,0:4],columns = categorical_features) 
 
-    """pca = PCA(n_component =2)
+    pca = PCA(n_component =2)
     X_principal = pca.fit_transform(X)
 
     db = DBSCAN(metric='euclidean',eps=0.3,min_samples=10,algorithm='auto').fit(X_principal)#it can be ball_tree, kd_tree, brute
     fil = db.labels_
     n_clusters = len (set(labels))- (1 if -1 in labels else 0)
     n_noise = list(labels).count(-1)
-    print(n_clusters)"""
+    print(n_clusters)
 
 
     text_box = tk.Text(root, height=10, width=60, padx=20, pady=15)
