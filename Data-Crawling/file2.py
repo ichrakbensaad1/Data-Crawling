@@ -318,15 +318,12 @@ canvas.grid(columnspan=3)
 
 frame_search = root
 
-
 lbl_search = Label(frame_search, text='le nom de attribut ',
                    font=('bold', 12), pady=25)
 lbl_search.grid(row=0, column=0)
 att_search = StringVar()
 att_search_entry = Entry(frame_search, textvariable=att_search)
 att_search_entry.grid(row=0, column=1)
-
-
 root.mainloop()
 
 
